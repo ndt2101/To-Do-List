@@ -1,4 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="newTaskViewModel"
+            type="com.tuan2101.todolist1.model.NewTaskViewModel" />
+    </data>
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -8,7 +16,7 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:hint="@string/add_a_new_task"/>
 
     <Button
@@ -22,3 +30,4 @@
         android:background="@android:color/transparent"
         android:textColor="@android:color/darker_gray" />
 </RelativeLayout>
+</layout>

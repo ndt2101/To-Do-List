@@ -1,4 +1,13 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    
+    <data>
+        <variable
+            name="Task"
+            type="com.tuan2101.todolist1.database.Task" />
+    </data>
+
+<androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,6 +30,8 @@
             android:paddingStart="8dp"
             android:buttonTint="@android:color/holo_orange_light"
             android:textStyle="italic"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            app:task="@{Task}"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
+</layout>

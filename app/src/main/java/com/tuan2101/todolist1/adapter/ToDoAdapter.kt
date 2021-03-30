@@ -1,4 +1,4 @@
-package com.tuan2101.todolist1.Adapter
+package com.tuan2101.todolist1.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.tuan2101.todolist1.MainActivity
-import com.tuan2101.todolist1.Model.ToDoModel
+import com.tuan2101.todolist1.model.ToDoViewModel
 import com.tuan2101.todolist1.R
 
-class ToDoAdapter(val activity: MainActivity): RecyclerView.Adapter<ToDoAdapter.ViewHolder>() {
+class ToDoAdapter(): RecyclerView.Adapter<ToDoAdapter.ViewHolder>() {
 
-    private lateinit var toDoList: List<ToDoModel>
+    private lateinit var toDoList: List<ToDoViewModel>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -20,12 +20,14 @@ class ToDoAdapter(val activity: MainActivity): RecyclerView.Adapter<ToDoAdapter.
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var item: ToDoModel = toDoList[position]
-        holder.toDoCheckBox.text = item.Task
-        holder.toDoCheckBox.isChecked = item.Status.toString().toBoolean()
+//        var item: ToDoViewModel = toDoList[position]
+//        holder.toDoCheckBox.text = item.Task
+//        holder.toDoCheckBox.isChecked = item.Status.toString().toBoolean()
+
+
     }
 
-    fun setTask(taskList: MutableList<ToDoModel>) {
+    fun setTask(taskList: MutableList<ToDoViewModel>) {
         toDoList = taskList
     }
 
