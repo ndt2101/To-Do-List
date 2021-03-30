@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">To Do List 1</string>
+    <string name="app_name">To Do List</string>
     <string name="add_a_new_task">Add a new task</string>
     <string name="save">Save</string>
     <string name="easier_to_control_your_work">Easier to control your work</string>
