@@ -19,6 +19,9 @@ import com.tuan2101.todolist1.model.NewTaskViewModelFactory
 
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.addCallback
+import com.tuan2101.todolist1.model.ToDoViewModel
+import com.tuan2101.todolist1.model.ToDoViewModelFactory
 
 
 class NewTaskFragment : Fragment() {
@@ -35,26 +38,43 @@ class NewTaskFragment : Fragment() {
 
         val taskId = requireArguments().getInt("taskId")
 
-        val viewModelFactory = NewTaskViewModelFactory(taskId,dataSource) //chua sua
+        val viewModelFactory = NewTaskViewModelFactory(taskId,dataSource)
 
         val newTaskViewModel = ViewModelProvider(this, viewModelFactory).get(NewTaskViewModel::class.java)
+
+        val toDoViewModelFactory = ToDoViewModelFactory(dataSource, application)
+
+        val toDoViewModel = ViewModelProvider(this, toDoViewModelFactory).get(ToDoViewModel::class.java)
 
         binding.newTaskViewModel = newTaskViewModel
 
         binding.lifecycleOwner = this //liveData
 
+        var taskText = binding.newTaskText.text.toString()
+
         newTaskViewModel.navigateToTaskList.observe(viewLifecycleOwner, Observer {
             it?.let {
-                var taskText = binding.newTaskText.text.toString()
-                if (taskText != "") {
+
+                if (taskText.isNotEmpty()) {
                     newTaskViewModel.saveTaskClicked(taskText)
                     this.findNavController().navigate(R.id.action_newTaskFragment_to_toDoListFragment)
                     val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0)
                     newTaskViewModel.doneNavigating()
                 }
+                else toDoViewModel.deleteEmptyTask(taskId)
             }
         })
+
+
+//        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+//            toDoViewModel.deleteEmptyTask(taskId)
+//        }
+//
+//        callback
+//
+//        callback.remove()
+
 
         return binding.root
     }

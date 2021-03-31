@@ -22,12 +22,6 @@ import com.tuan2101.todolist1.databinding.FragmentToDoListBinding
 class ToDoListFragment : Fragment() {
 
 
-    private lateinit var taskRecyclerView: RecyclerView
-    private lateinit var taskList: MutableList<ToDoViewModel>
-
-
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -63,9 +57,16 @@ class ToDoListFragment : Fragment() {
         })
 
         toDoViewModel.tasks.observe(viewLifecycleOwner, Observer {
-
+            it?.let {
+                adapter.submitList(it)
+            }
         })
 
         return binding.root
     }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
 }

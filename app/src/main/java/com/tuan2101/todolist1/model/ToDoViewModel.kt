@@ -46,9 +46,9 @@ class ToDoViewModel(val database: TaskDatabaseDao,
         return task
     }
 
-    private suspend fun delete(task: Task) {
+    private suspend fun delete(taskId: Int) {
         withContext(Dispatchers.IO) {
-            database.delete(task.taskId)
+            database.delete(taskId)
         }
     }
 
@@ -75,6 +75,12 @@ class ToDoViewModel(val database: TaskDatabaseDao,
             newTask.value = getNewTaskFromDataBase()
 
             _navigateToCreateNewTask.value = newTask.value
+        }
+    }
+
+    fun deleteEmptyTask(taskId: Int) {
+        viewModelScope.launch {
+            delete(taskId)
         }
     }
 

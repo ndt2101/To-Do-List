@@ -22,7 +22,9 @@
         tools:layout="@layout/fragment_new_task">
         <action
             android:id="@+id/action_newTaskFragment_to_toDoListFragment"
-            app:destination="@id/toDoListFragment" />
+            app:destination="@id/toDoListFragment"
+            app:popUpTo="@id/toDoListFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="taskKey"
             app:argType="integer" />
