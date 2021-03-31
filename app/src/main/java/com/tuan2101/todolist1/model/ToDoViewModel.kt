@@ -43,6 +43,12 @@ class ToDoViewModel(val database: TaskDatabaseDao,
         if (task?.endTimeMilli != task?.startTimeMilli) {
             task = null
         }
+
+        println("=====================================================================================================================")
+        println(task?.startTimeMilli)
+        println(task?.endTimeMilli)
+        println(task?.taskId)
+        println("================================================================================================================")
         return task
     }
 
@@ -68,9 +74,11 @@ class ToDoViewModel(val database: TaskDatabaseDao,
 
     fun onCreateNewTask() {
         viewModelScope.launch {
-            val newCreatedTask = Task()
-
-            insert(newCreatedTask)
+            var newCreatedTask = database.getNewTask()
+            if (newCreatedTask?.endTimeMilli != newCreatedTask?.startTimeMilli) {
+                newCreatedTask = Task()
+                insert(newCreatedTask)
+            }
 
             newTask.value = getNewTaskFromDataBase()
 

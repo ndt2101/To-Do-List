@@ -37,10 +37,8 @@ class NewTaskViewModel(private val taskId: Int = 0,
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val newTask = database.get(taskId) ?: return@withContext
-
                 newTask.endTimeMilli = System.currentTimeMillis()
                 newTask.task = "$task ${newTask.startTimeMilli} ${newTask.endTimeMilli}"
-
                 update(newTask)
             }
         }

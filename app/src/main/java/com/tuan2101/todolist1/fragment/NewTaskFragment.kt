@@ -32,6 +32,7 @@ class NewTaskFragment : Fragment() {
 
         val binding: FragmentNewTaskBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_new_task, container, false)
+        binding.lifecycleOwner = this //liveData
 
         val application = requireNotNull(this.activity).application
         val dataSource = TaskDatabase.getInstance(application).taskDatabaseDao
@@ -48,13 +49,15 @@ class NewTaskFragment : Fragment() {
 
         binding.newTaskViewModel = newTaskViewModel
 
-        binding.lifecycleOwner = this //liveData
 
-        var taskText = binding.newTaskText.text.toString()
+
+
 
         newTaskViewModel.navigateToTaskList.observe(viewLifecycleOwner, Observer {
-            it?.let {
 
+            it?.let {
+                var taskText = binding.newTaskText.text.toString()
+                println("++++++++++++++++++++++++++++++++++++++++++++++++navigate")
                 if (taskText.isNotEmpty()) {
                     newTaskViewModel.saveTaskClicked(taskText)
                     this.findNavController().navigate(R.id.action_newTaskFragment_to_toDoListFragment)
