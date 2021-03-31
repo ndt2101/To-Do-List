@@ -56,13 +56,16 @@ class ToDoListFragment : Fragment() {
 
         toDoViewModel.navigateToCreateNewTask.observe(viewLifecycleOwner, Observer { task ->
             task?.let {
-                toDoViewModel.onCreateNewTask()
                 val bundle = bundleOf("taskId" to task.taskId)
                 this.findNavController().navigate(R.id.action_toDoListFragment_to_newTaskFragment, bundle)
+                toDoViewModel.doneNavigating()
             }
-
-            toDoViewModel
         })
+
+        toDoViewModel.tasks.observe(viewLifecycleOwner, Observer {
+
+        })
+
         return binding.root
     }
 }

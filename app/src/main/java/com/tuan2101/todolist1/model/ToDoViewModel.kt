@@ -19,19 +19,14 @@ class ToDoViewModel(val database: TaskDatabaseDao,
     val navigateToCreateNewTask: LiveData<Task>
         get() = _navigateToCreateNewTask
 
-    fun onCreateNewTaskNavigated() {
-        _navigateToCreateNewTask.value = null
-    }
-
-    fun onCreateButtonClicked(task: Task) {
-        _navigateToCreateNewTask.value = task
-    }
 
     fun doneNavigating() {
         _navigateToCreateNewTask.value = null
     }
 
     private var newTask = MutableLiveData<Task?>()
+
+    val tasks = database.getAllTask()
 
     init {
         initializeNewTask()
@@ -79,20 +74,9 @@ class ToDoViewModel(val database: TaskDatabaseDao,
 
             newTask.value = getNewTaskFromDataBase()
 
+            _navigateToCreateNewTask.value = newTask.value
         }
     }
 
 
 }
-
-
-//    var _id: Int = 0
-//    val ID: Int
-//        get() = _id
-//
-//    var _status: Int = 0
-//    val Status: Int
-//        get() = _status
-//    var _task:String = ""
-//    val Task: String
-//        get() = _task

@@ -27,7 +27,8 @@
         android:layout_alignParentEnd="true"
         android:textSize="18dp"
         android:textAllCaps="false"
-        android:background="@android:color/transparent"
+        android:background="@android:color/holo_orange_light"
+        android:onClick="@{() -> newTaskViewModel.onSaveTaskClick()}"
         android:textColor="@android:color/darker_gray" />
 </RelativeLayout>
 </layout>

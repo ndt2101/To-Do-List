@@ -27,7 +27,7 @@ class ToDoAdapter(): RecyclerView.Adapter<ToDoAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 1
+        return 10
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

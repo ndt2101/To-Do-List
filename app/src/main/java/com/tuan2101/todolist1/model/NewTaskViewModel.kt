@@ -21,8 +21,12 @@ class NewTaskViewModel(private val taskId: Int = 0,
         _navigateToTaskList.value = null
     }
 
+    fun onSaveTaskClick() {
+        _navigateToTaskList.value = true
+    }
 
-    fun onSaveTaskClicked(task: String) {
+
+    fun saveTaskClicked(task: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val newTask = database.get(taskId) ?: return@withContext
@@ -30,8 +34,6 @@ class NewTaskViewModel(private val taskId: Int = 0,
                 newTask.endTimeMilli = System.currentTimeMillis()
                 database.update(newTask)
             }
-
-            _navigateToTaskList.value = true
         }
     }
 

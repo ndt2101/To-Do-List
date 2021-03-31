@@ -39,6 +39,7 @@
         android:src="@drawable/add_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:onClick="@{() -> ToDoViewModel.onCreateNewTask()}"
         android:layout_margin="32dp"/>
 
 </RelativeLayout>
