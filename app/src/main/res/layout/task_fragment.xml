@@ -31,7 +31,8 @@
             android:buttonTint="@android:color/holo_orange_light"
             android:textStyle="italic"
             android:textSize="18sp"
-            app:task="@{Task}"/>
+            app:task="@{Task}"
+            android:checked=""/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
 </layout>

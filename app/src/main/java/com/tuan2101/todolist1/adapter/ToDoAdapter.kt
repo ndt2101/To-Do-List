@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tuan2101.todolist1.database.Task
 import com.tuan2101.todolist1.databinding.TaskFragmentBinding
+import com.tuan2101.todolist1.generated.callback.OnClickListener
 
 
-class ToDoAdapter(): ListAdapter<Task,
+class ToDoAdapter(val taskListener: TaskListener): ListAdapter<Task,
         ToDoAdapter.ViewHolder>(SleepNightDiffCallback()) {
 
 
@@ -20,14 +21,14 @@ class ToDoAdapter(): ListAdapter<Task,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
 
-        holder.bind(item)
+        holder.bind(taskListener ,item)
 
 
     }
 
     class ViewHolder(private val binding: TaskFragmentBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(task: Task) {
+        fun bind(onClickListener: TaskListener,task: Task) {
             binding.task = task
             binding.executePendingBindings()
         }
@@ -51,4 +52,8 @@ class SleepNightDiffCallback : DiffUtil.ItemCallback<Task>() {
     override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
         return oldItem == newItem
     }
+}
+
+class TaskListener(val clickListener: (TaskId: Int) -> Unit) {
+    fun onClick(task: Task) = clickListener(task.taskId)
 }

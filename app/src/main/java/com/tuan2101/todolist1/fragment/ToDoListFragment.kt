@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tuan2101.todolist1.model.ToDoViewModel
 import com.tuan2101.todolist1.model.ToDoViewModelFactory
 import com.tuan2101.todolist1.R
+import com.tuan2101.todolist1.adapter.TaskListener
 import com.tuan2101.todolist1.adapter.ToDoAdapter
 import com.tuan2101.todolist1.database.TaskDatabase
 import com.tuan2101.todolist1.databinding.FragmentToDoListBinding
@@ -38,7 +39,9 @@ class ToDoListFragment : Fragment() {
 
         binding.toDoViewModel = toDoViewModel
 
-        var adapter = ToDoAdapter() // chua truyen vao cai gi ca
+        var adapter = ToDoAdapter(TaskListener { taskId ->
+            toDoViewModel.onTaskClick(taskId)
+        }) // chua truyen vao cai gi ca
 
         binding.taskRecyclerView.adapter = adapter
 
@@ -61,6 +64,12 @@ class ToDoListFragment : Fragment() {
                 adapter.submitList(it)
             }
         })
+
+//        toDoViewModel.clickToChangeStatus.observe(viewLifecycleOwner, Observer { taskId ->
+////            taskId?.let{
+////                toDoViewModel.updateTaskStatus(taskId)
+////            }
+////        })   dang mac o day k luu duc status cho checkbox
 
         return binding.root
     }

@@ -24,6 +24,14 @@ class ToDoViewModel(val database: TaskDatabaseDao,
         _navigateToCreateNewTask.value = null
     }
 
+    private val _clickToChangeStatus = MutableLiveData<Int>()
+    val clickToChangeStatus: LiveData<Int>
+        get() = _clickToChangeStatus
+
+    fun onTaskClick(id: Int) {
+        _clickToChangeStatus.value = id
+    }
+
     private var newTask = MutableLiveData<Task?>()
 
     val tasks = database.getAllTask()
@@ -83,6 +91,16 @@ class ToDoViewModel(val database: TaskDatabaseDao,
             newTask.value = getNewTaskFromDataBase()
 
             _navigateToCreateNewTask.value = newTask.value
+        }
+    }
+
+    fun updateTaskStatus(id: Int ,status: Boolean) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                val item = database.get(id) ?: return@withContext
+                item.status = status
+                database.update(item)
+            }
         }
     }
 
