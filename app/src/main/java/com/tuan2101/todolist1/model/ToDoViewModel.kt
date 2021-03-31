@@ -15,16 +15,20 @@ class ToDoViewModel(val database: TaskDatabaseDao,
                     application: Application
 ): AndroidViewModel(application) {
 
-    private val _navigateToCreateNewTask = MutableLiveData<Int>()
-    val navigateToCreateNewTask: LiveData<Int>
+    private val _navigateToCreateNewTask = MutableLiveData<Task>()
+    val navigateToCreateNewTask: LiveData<Task>
         get() = _navigateToCreateNewTask
 
     fun onCreateNewTaskNavigated() {
         _navigateToCreateNewTask.value = null
     }
 
-    fun onCreateButtonClicked(id: Int) {
-        _navigateToCreateNewTask.value = id
+    fun onCreateButtonClicked(task: Task) {
+        _navigateToCreateNewTask.value = task
+    }
+
+    fun doneNavigating() {
+        _navigateToCreateNewTask.value = null
     }
 
     private var newTask = MutableLiveData<Task?>()

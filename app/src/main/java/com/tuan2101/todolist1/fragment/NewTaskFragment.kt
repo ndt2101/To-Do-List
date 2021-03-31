@@ -26,7 +26,9 @@ class NewTaskFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val dataSource = TaskDatabase.getInstance(application).taskDatabaseDao
 
-        val viewModelFactory = NewTaskViewModelFactory(0,dataSource) //chua sua
+        val taskId = requireArguments().getInt("taskId")
+
+        val viewModelFactory = NewTaskViewModelFactory(taskId,dataSource) //chua sua
 
         val newTaskViewModel = ViewModelProvider(this, viewModelFactory).get(NewTaskViewModel::class.java)
 

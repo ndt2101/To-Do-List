@@ -11,7 +11,6 @@ import com.tuan2101.todolist1.R
 
 class ToDoAdapter(): RecyclerView.Adapter<ToDoAdapter.ViewHolder>() {
 
-    private lateinit var toDoList: List<ToDoViewModel>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -27,12 +26,8 @@ class ToDoAdapter(): RecyclerView.Adapter<ToDoAdapter.ViewHolder>() {
 
     }
 
-    fun setTask(taskList: MutableList<ToDoViewModel>) {
-        toDoList = taskList
-    }
-
     override fun getItemCount(): Int {
-        return toDoList.size
+        return 1
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

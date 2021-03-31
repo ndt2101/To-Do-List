@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tuan2101.todolist1.model.ToDoViewModel
@@ -32,6 +35,7 @@ class ToDoListFragment : Fragment() {
                 inflater, R.layout.fragment_to_do_list, container, false)
 
         val application = requireNotNull(this.activity).application
+
         val dataSource = TaskDatabase.getInstance(application).taskDatabaseDao
 
         val viewModelFactory = ToDoViewModelFactory(dataSource, application)
@@ -44,13 +48,21 @@ class ToDoListFragment : Fragment() {
 
         binding.taskRecyclerView.adapter = adapter
 
+        binding.lifecycleOwner = this //liveData
+
         val manager = LinearLayoutManager(activity)
 
         binding.taskRecyclerView.layoutManager = manager
 
+        toDoViewModel.navigateToCreateNewTask.observe(viewLifecycleOwner, Observer { task ->
+            task?.let {
+                toDoViewModel.onCreateNewTask()
+                val bundle = bundleOf("taskId" to task.taskId)
+                this.findNavController().navigate(R.id.action_toDoListFragment_to_newTaskFragment, bundle)
+            }
 
-
-
+            toDoViewModel
+        })
         return binding.root
     }
 }
