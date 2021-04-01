@@ -83,7 +83,7 @@ class ToDoViewModel(val database: TaskDatabaseDao,
     fun onCreateNewTask() {
         viewModelScope.launch {
             var newCreatedTask = database.getNewTask()
-            if (newCreatedTask?.endTimeMilli != newCreatedTask?.startTimeMilli) {
+            if (newCreatedTask?.endTimeMilli != newCreatedTask?.startTimeMilli || newCreatedTask == null) {
                 newCreatedTask = Task()
                 insert(newCreatedTask)
             }
