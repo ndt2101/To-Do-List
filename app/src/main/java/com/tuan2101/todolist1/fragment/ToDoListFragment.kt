@@ -41,7 +41,7 @@ class ToDoListFragment : Fragment() {
 
         var adapter = ToDoAdapter(TaskListener { taskId ->
             toDoViewModel.onTaskClick(taskId)
-        }) // chua truyen vao cai gi ca
+        }, dataSource) // chua truyen vao cai gi ca
 
         binding.taskRecyclerView.adapter = adapter
 
@@ -62,6 +62,7 @@ class ToDoListFragment : Fragment() {
         toDoViewModel.tasks.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
+                println(it)
             }
         })
 
