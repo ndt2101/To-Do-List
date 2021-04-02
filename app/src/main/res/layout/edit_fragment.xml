@@ -1,0 +1,39 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="editViewModel"
+            type="com.tuan2101.todolist1.model.EditViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/newTaskText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Update"
+            android:layout_below="@id/newTaskText"
+            android:layout_alignParentEnd="true"
+            android:textSize="18dp"
+            android:textColorHighlight="@color/black"
+            android:textAllCaps="false"
+            android:background="@android:color/holo_orange_light"
+
+            android:textColor="@android:color/darker_gray" />
+    </RelativeLayout>
+</layout>
+
+
+<!--loi nay k hieu kieu gi-->
+<!--    android:onClick="@{() -> editViewModel.onSaveTaskClick()}"-->

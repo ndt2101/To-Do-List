@@ -13,11 +13,11 @@ data class Task(
         var status: Boolean? = false,
 
         @ColumnInfo(name = "task")
-        var task: String? = null,
+        var task: String? = null
 
-        @ColumnInfo(name = "start_time_milli")
-        val startTimeMilli: Long = System.currentTimeMillis(),
+//        @ColumnInfo(name = "start_time_milli")
+//        val startTimeMilli: Long = System.currentTimeMillis(),
 
-        @ColumnInfo(name = "end_time_milli")
-        var endTimeMilli: Long = startTimeMilli
+//        @ColumnInfo(name = "end_time_milli")
+//        var endTimeMilli: Long = startTimeMilli
 )

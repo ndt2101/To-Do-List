@@ -10,12 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.tuan2101.todolist1.MainActivity
 import com.tuan2101.todolist1.model.ToDoViewModel
 import com.tuan2101.todolist1.model.ToDoViewModelFactory
 import com.tuan2101.todolist1.R
-import com.tuan2101.todolist1.adapter.TaskListener
+import com.tuan2101.todolist1.adapter.RecyclerItemTouchHelper
 import com.tuan2101.todolist1.adapter.ToDoAdapter
 import com.tuan2101.todolist1.database.TaskDatabase
 import com.tuan2101.todolist1.databinding.FragmentToDoListBinding
@@ -39,9 +41,7 @@ class ToDoListFragment : Fragment() {
 
         binding.toDoViewModel = toDoViewModel
 
-        var adapter = ToDoAdapter(TaskListener { taskId ->
-            toDoViewModel.onTaskClick(taskId)
-        }, dataSource) // chua truyen vao cai gi ca
+        var adapter = ToDoAdapter(application, dataSource, activity as MainActivity) // chua truyen vao cai gi ca
 
         binding.taskRecyclerView.adapter = adapter
 
@@ -50,6 +50,10 @@ class ToDoListFragment : Fragment() {
         val manager = LinearLayoutManager(activity)
 
         binding.taskRecyclerView.layoutManager = manager
+
+        val itemTouchHelper = ItemTouchHelper(RecyclerItemTouchHelper(adapter, this))
+
+        itemTouchHelper.attachToRecyclerView(binding.taskRecyclerView)
 
         toDoViewModel.navigateToCreateNewTask.observe(viewLifecycleOwner, Observer { task ->
             task?.let {

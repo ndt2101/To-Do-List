@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_toDoListFragment_to_newTaskFragment"
             app:destination="@id/newTaskFragment" />
+        <action
+            android:id="@+id/action_toDoListFragment_to_editFragment"
+            app:destination="@id/editFragment" />
     </fragment>
     <fragment
         android:id="@+id/newTaskFragment"
@@ -28,5 +31,14 @@
         <argument
             android:name="taskKey"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/editFragment"
+        android:name="com.tuan2101.todolist1.fragment.EditFragment"
+        android:label="EditFragment"
+        tools:layout="@layout/edit_fragment">
+        <action
+            android:id="@+id/action_editFragment_to_toDoListFragment"
+            app:destination="@id/toDoListFragment" />
     </fragment>
 </navigation>

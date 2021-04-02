@@ -37,28 +37,28 @@ class ToDoViewModel(val database: TaskDatabaseDao,
     val tasks = database.getAllTask()
 
     init {
-        initializeNewTask()
+//        initializeNewTask()
     }
 
-    private fun initializeNewTask() {
-        viewModelScope.launch {
-            newTask.value = getNewTaskFromDataBase()
-        }
-    }
+//    private fun initializeNewTask() {
+//        viewModelScope.launch {
+//            newTask.value = getNewTaskFromDataBase()
+//        }
+//    }
 
-    private suspend fun getNewTaskFromDataBase(): Task? {
-        var task = database.getNewTask()
-        if (task?.endTimeMilli != task?.startTimeMilli) {
-            task = null
-        }
+//    private suspend fun getNewTaskFromDataBase(): Task? {
+//        var task = database.getNewTask()
+//        if (task?.endTimeMilli != task?.startTimeMilli) {
+//            task = null
+//        }
 
-        println("=====================================================================================================================")
-        println(task?.startTimeMilli)
-        println(task?.endTimeMilli)
-        println(task?.taskId)
-        println("================================================================================================================")
-        return task
-    }
+//        println("=====================================================================================================================")
+////        println(task?.startTimeMilli)
+////        println(task?.endTimeMilli)
+//        println(task?.taskId)
+//        println("================================================================================================================")
+//        return task
+//    }
 
     private suspend fun delete(taskId: Int) {
         withContext(Dispatchers.IO) {
@@ -82,27 +82,30 @@ class ToDoViewModel(val database: TaskDatabaseDao,
 
     fun onCreateNewTask() {
         viewModelScope.launch {
-            var newCreatedTask = database.getNewTask()
-            if (newCreatedTask?.endTimeMilli != newCreatedTask?.startTimeMilli || newCreatedTask == null) {
-                newCreatedTask = Task()
-                insert(newCreatedTask)
-            }
+//            var newCreatedTask = database.getNewTask()
+//            if (newCreatedTask?.endTimeMilli != newCreatedTask?.startTimeMilli || newCreatedTask == null) {
+//                newCreatedTask = Task()
+//                insert(newCreatedTask)
+//            }
 
-            newTask.value = getNewTaskFromDataBase()
+//            newTask.value = getNewTaskFromDataBase()
 
+            newTask.value = Task()
             _navigateToCreateNewTask.value = newTask.value
+
+
         }
     }
 
-    fun updateTaskStatus(id: Int ,status: Boolean) {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                val item = database.get(id) ?: return@withContext
-                item.status = status
-                database.update(item)
-            }
-        }
-    }
+//    fun updateTaskStatus(id: Int ,status: Boolean) {
+//        viewModelScope.launch {
+//            withContext(Dispatchers.IO) {
+//                val item = database.get(id) ?: return@withContext
+//                item.status = status
+//                database.update(item)
+//            }
+//        }
+//    }
 
     fun deleteEmptyTask(taskId: Int) {
         viewModelScope.launch {

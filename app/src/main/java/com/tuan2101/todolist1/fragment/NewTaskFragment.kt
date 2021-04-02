@@ -50,15 +50,12 @@ class NewTaskFragment : Fragment() {
         binding.newTaskViewModel = newTaskViewModel
 
 
-
-
-
         newTaskViewModel.navigateToTaskList.observe(viewLifecycleOwner, Observer {
 
             it?.let {
                 var taskText = binding.newTaskText.text.toString()
-                println("++++++++++++++++++++++++++++++++++++++++++++++++navigate")
                 if (taskText.isNotEmpty()) {
+                    println("++++++++++++++++++++++++++++++++++++++++++++++++navigate")
                     newTaskViewModel.saveTaskClicked(taskText)
                     this.findNavController().navigate(R.id.action_newTaskFragment_to_toDoListFragment)
                     val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

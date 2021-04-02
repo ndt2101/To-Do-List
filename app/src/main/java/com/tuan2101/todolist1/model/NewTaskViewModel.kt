@@ -33,15 +33,78 @@ class NewTaskViewModel(private val taskId: Int = 0,
     }
 
 
+    /**
+     * start test fix
+     */
+
+
+//
+//    private var newTask = MutableLiveData<Task?>()
+//
+//    val tasks = database.getAllTask()
+
+//    init {
+////        initializeNewTask()
+//    }
+
+//    private fun initializeNewTask() {
+//        viewModelScope.launch {
+//            newTask.value = getNewTaskFromDataBase()
+//        }
+//    }
+
+//    private suspend fun getNewTaskFromDataBase(): Task? {
+//        var task = database.getNewTask()
+//        if (task?.endTimeMilli != task?.startTimeMilli) {
+//            task = null
+//        }
+//
+//        println("=====================================================================================================================")
+//        println(task?.startTimeMilli)
+//        println(task?.endTimeMilli)
+//        println(task?.taskId)
+//        println("================================================================================================================")
+//        return task
+//    }
+
+//    private suspend fun delete(taskId: Int) {
+//        withContext(Dispatchers.IO) {
+//            database.delete(taskId)
+//        }
+//    }
+
+
+    private suspend fun insert(task: Task) {
+        withContext(Dispatchers.IO) {
+            database.insert(task)
+        }
+    }
+
+
+
+
+
     fun saveTaskClicked(task: String) {
+
+        val newCreatedTask = Task()
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val newTask = database.get(taskId) ?: return@withContext
-                newTask.endTimeMilli = System.currentTimeMillis()
-                newTask.task = "$task ${newTask.startTimeMilli} ${newTask.endTimeMilli}"
-                update(newTask)
+//                val newTask = database.get(taskId) ?: return@withContext
+//                newTask.endTimeMilli = System.currentTimeMillis()
+//                newTask.task = "$task ${newTask.startTimeMilli} ${newTask.endTimeMilli}"
+//                update(newTask)
+
+//                newCreatedTask.endTimeMilli = System.currentTimeMillis()
+                newCreatedTask.task = task
+
+                insert(newCreatedTask)
             }
         }
     }
+
+
+    /**
+     * end task fix
+     */
 
 }
