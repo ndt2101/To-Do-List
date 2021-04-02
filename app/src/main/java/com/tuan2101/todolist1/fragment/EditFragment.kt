@@ -54,12 +54,14 @@ class EditFragment: Fragment() {
                 println("======================================================")
                 println("clicked")
                 println("=============================khac=========================")
-                editViewModel.saveTaskClicked(binding.newTaskText.text.toString())
-                val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0)
-                this.findNavController().navigate(R.id.action_editFragment_to_toDoListFragment)
-                editViewModel.doneNavigating()
-                println(editViewModel.navigateToTaskList.value)
+                if (binding.newTaskText.text.toString().isNotEmpty()) {
+                    editViewModel.saveTaskClicked(binding.newTaskText.text.toString())
+                    val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0)
+                    this.findNavController().navigate(R.id.action_editFragment_to_toDoListFragment)
+                    editViewModel.doneNavigating()
+                    println(editViewModel.navigateToTaskList.value)
+                }
             }
         })
 
