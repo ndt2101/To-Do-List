@@ -54,8 +54,8 @@ class EditFragment: Fragment() {
                 println("======================================================")
                 println("clicked")
                 println("=============================khac=========================")
-                if (binding.newTaskText.text.toString().isNotEmpty()) {
-                    editViewModel.saveTaskClicked(binding.newTaskText.text.toString())
+                if (binding.newTaskText.text.toString().trim().isNotEmpty()) {
+                    editViewModel.saveTaskClicked(binding.newTaskText.text.toString().trim())
                     val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0)
                     this.findNavController().navigate(R.id.action_editFragment_to_toDoListFragment)

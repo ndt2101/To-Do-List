@@ -53,10 +53,10 @@ class NewTaskFragment : Fragment() {
         newTaskViewModel.navigateToTaskList.observe(viewLifecycleOwner, Observer {
 
             it?.let {
-                var taskText = binding.newTaskText.text.toString()
+                var taskText = binding.newTaskText.text.toString().trim()
                 if (taskText.isNotEmpty()) {
                     println("++++++++++++++++++++++++++++++++++++++++++++++++navigate")
-                    newTaskViewModel.saveTaskClicked(taskText)
+                    newTaskViewModel.saveTaskClicked(taskText.trim())
                     this.findNavController().navigate(R.id.action_newTaskFragment_to_toDoListFragment)
                     val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0)
