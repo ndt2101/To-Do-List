@@ -91,7 +91,7 @@ class ToDoViewModel(val database: TaskDatabaseDao,
 //            newTask.value = getNewTaskFromDataBase()
 
             newTask.value = Task()
-//            println("herrrrrrrrrrrrrrrrrrrrrrrrrrra ${newTask.value!!.taskId}")
+            println("herrrrrrrrrrrrrrrrrrrrrrrrrrra ${newTask.value!!.taskId}")
             _navigateToCreateNewTask.value = newTask.value
 
 

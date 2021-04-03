@@ -62,7 +62,7 @@ class NewTaskFragment : Fragment() {
                     imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0)
                     newTaskViewModel.doneNavigating()
                 }
-                else toDoViewModel.deleteEmptyTask(taskId)
+//                else toDoViewModel.deleteEmptyTask(taskId)
             }
         })
 

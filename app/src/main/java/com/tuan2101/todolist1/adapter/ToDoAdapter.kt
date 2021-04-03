@@ -137,6 +137,8 @@ class ToDoAdapter(val application: Application , val database: TaskDatabaseDao, 
 
 }
 
+
+//k can thong bao list trong db thay doi nua, luon observe va tra ve list trong db
 class SleepNightDiffCallback : DiffUtil.ItemCallback<Task>() {
     override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
         return oldItem.taskId == newItem.taskId
