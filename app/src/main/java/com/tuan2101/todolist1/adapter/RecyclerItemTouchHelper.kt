@@ -29,6 +29,7 @@ class RecyclerItemTouchHelper(private val adapter: ToDoAdapter, val fragment: To
             ) { dialog, which -> adapter.deleteItem(position) }
             builder.setNegativeButton(R.string.cancel) { dialog, which -> adapter.notifyItemChanged(viewHolder.adapterPosition) }
             val dialog = builder.create()
+            dialog.setCanceledOnTouchOutside(false)
             dialog.show()
         } else {
 //            println("======================================================")
